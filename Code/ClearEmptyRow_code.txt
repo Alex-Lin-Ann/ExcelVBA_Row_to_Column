@@ -1,0 +1,11 @@
+Sub DeleteEmpty()
+	Dim deleteRows As String
+	On Error Resume Next
+
+	deleteRows = Sheet1.Range("b11").Value
+
+	Sheet2.Activate
+	Sheet2.Range(deleteRows & ":" & deleteRows).SpecialCells(xlCellTypeBlanks).EntireRow.Delete
+	Sheet1.Activate
+
+End Sub

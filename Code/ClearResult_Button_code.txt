@@ -1,0 +1,7 @@
+Private Sub cmdClearResult_Click()
+    Sheet3.Cells.Clear
+    Sheet3.Activate
+    Sheet3.Cells(1, 1).Select
+    Sheet1.Activate
+    MsgBox "清除完成", vbOKOnly, "Clear Complete"
+End Sub

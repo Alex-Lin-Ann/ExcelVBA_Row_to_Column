@@ -1,0 +1,79 @@
+Private Sub UserForm_Activate()
+
+On Error Resume Next
+Dim msgyn As String
+home.Label1.BackStyle = 0
+PB.Width = 0
+
+    Sheet3.Activate
+    Sheet3.Cells(1, 1).Select
+    Sheet1.Activate
+On Error Resume Next
+
+If Sheets("原始資料").Range("A1") = "" Then
+
+MsgBox "請在[原始資料]A1儲存格貼上資料", vbOKOnly, "Error"
+Set home = Nothing
+
+Exit Sub
+
+
+End If
+
+
+x = 0   '列數
+y = 3   '欄數
+r = 1   '結果列數
+
+
+
+For x = 1 To Sheets("原始資料").Range("B1").End(xlDown).Row
+
+    If Sheets("原始資料").Cells(x, 1) <> "" Then
+        Sheets("結果").Cells(r, 1) = Sheets("原始資料").Cells(x, 1)
+        Sheets("結果").Cells(r, 2) = Sheets("原始資料").Cells(x, 2)
+
+        Else
+        
+        If Sheets("原始資料").Cells(x, 1) = "" Then
+        Sheets("結果").Cells(r, y) = Sheets("原始資料").Cells(x, 2)
+        y = y + 1
+
+        End If
+    
+    End If
+        If Sheets("原始資料").Cells(x + 1, 1) <> "" Then
+    
+            r = r + 1
+            y = 3
+
+        End If
+        
+    Application.Wait Now + (TimeValue("00:00:01") / 2)
+    Processing.PB.Width = (x - 1) * 420 / (Sheets("原始資料").Range("B1").End(xlDown).Row - 1)
+    'PB.Value = x - 1
+    Processing.Label1.Caption = Int((x - 1) / (Sheets("原始資料").Range("B1").End(xlDown).Row - 1) * 100) & "%"
+    Processing.Repaint
+    Processing.Caption = "水之呼吸 柒之型....." & Int((x - 1) / (Sheets("原始資料").Range("B1").End(xlDown).Row - 1) * 100) & "%"
+
+Next
+newHour = Hour(Now())
+newMinute = Minute(Now())
+newSecond = Second(Now()) + 1
+waitTime = TimeSerial(newHour, newMinute, newSecond)
+Application.Wait waitTime
+Unload Me
+home.Caption = "Completed"
+Set home = Nothing
+Exit Sub
+
+
+End Sub
+
+
+
+
+
+
+
+

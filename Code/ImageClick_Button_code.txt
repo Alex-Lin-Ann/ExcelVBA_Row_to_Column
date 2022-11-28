@@ -1,0 +1,20 @@
+Private Sub Image1_Click()
+
+    Dim msgyn As String
+        Sheet3.Cells.Clear
+        Sheet3.Activate
+        Sheet3.Cells(1, 1).Select
+        Sheet1.Activate
+    On Error Resume Next
+    
+    If Sheets("原始資料").Cells(1, 1) = "" Then
+        MsgBox "請在[原始資料]A1儲存格貼上資料", vbOKOnly, "Error"
+        Exit Sub
+    Else
+        Loading.Show
+    
+    End If
+
+    KO.Show
+
+End Sub

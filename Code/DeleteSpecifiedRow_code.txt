@@ -1,0 +1,18 @@
+Sub Delete2()
+
+    bRows = Sheet1.Range("b9").Value
+    dRows = Sheet1.Range("b10").Value
+    
+    For i = 1 To [A65536].End(xlUp).Row
+        m = bRows * i + 1 ' 每 # 行 * 1 + 1
+        n = m + dRows - 1 'm + 選取# - 1
+        If i > 65536 Then Exit Sub
+            Sheet2.Activate
+            Sheet2.Rows(m & ":" & n).Select
+            Selection.Delete
+    Next
+        Range("A1").Select
+        Sheet1.Activate
+
+
+End Sub

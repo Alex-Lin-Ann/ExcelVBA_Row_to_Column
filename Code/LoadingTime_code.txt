@@ -1,0 +1,13 @@
+Private Sub UserForm_Activate()
+
+newHour = Hour(Now())
+newMinute = Minute(Now())
+newSecond = Second(Now()) + 2
+waitTime = TimeSerial(newHour, newMinute, newSecond)
+Application.Wait waitTime
+Unload Me
+Processing.Show
+Set home = Nothing
+
+End Sub
+
